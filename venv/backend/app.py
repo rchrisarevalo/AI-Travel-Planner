@@ -1,11 +1,11 @@
-from flask import Flask,request, jsonify
+from flask import Flask, request, jsonify
 import json, requests
 import os
 from flask_cors import CORS
 from dotenv import load_dotenv
 #from transformers import pipeline
 
-load_dotenv()
+load_dotenv('../../secret.env')
 
 app = Flask(__name__)
 CORS(app)
@@ -29,11 +29,13 @@ def generate_recommendations(start_date, end_date, budget, city, state, country)
         })
     )
     result = response.json()
-    return result['choices'][0]['messages']['content']
+    print(response.json())
+    return result['choices'][0]['message']['content']
 
 @app.route('/')
 def home():
-    return "AI Travel Planner"
+    # Tests
+    return generate_recommendations("July 27", "August 3", 1000.00)
 
 @app.route('/recommendations', methods=['POST'])
 def getRecommendations():
