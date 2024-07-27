@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Housing from './components/housing';
+import GoogleMaps from './components/GoogleMaps';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -34,6 +35,7 @@ function App() {
           </p>
         </>} />
         <Route path="/housing" element={<Housing />} />
+        <Route path="/GoogleMaps" element={<GoogleMaps />} />
       </Routes>
     </Router>
   )

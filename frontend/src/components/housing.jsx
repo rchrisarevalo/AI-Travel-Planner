@@ -1,12 +1,6 @@
-
-
 function Housing() {
-
-    return (
-        <>
-            <p>hey</p>
-        </>
-    )
+    return <>
+    </>
 }
 
 export default Housing
