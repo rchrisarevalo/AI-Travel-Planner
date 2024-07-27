@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Housing() {
   const [form, setForm] = useState({
@@ -12,6 +12,22 @@ function Housing() {
 
   const handleSubmission = (e) => {
     e.preventDefault();
+
+    useEffect(async () => {
+      const res = await fetch({
+        method: 'POST',
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      
+      if (res.ok) {
+        const data = await res.json()
+        
+      }
+
+    }, [])
   };
 
   const handleChangeAttr = (e) => {
@@ -28,8 +44,9 @@ function Housing() {
   console.log(form)
 
   return (
-    <>
+    <div className="housing-form-wrapper">
       <form className="housing-form" onSubmit={handleSubmission}>
+        <h3>See your travel possibilities!</h3>
         <span className="housing-form-row">
           <span className="housing-form-col">
             <label>Start date:</label>
@@ -42,25 +59,25 @@ function Housing() {
         </span>
         <label>Select how much you are going to spend on your trip: </label>
         <select name="budget" onChange={handleChangeAttr}>
-          <option value="$0-$1000">$0-$1000</option>
-          <option value="$1000-$10000">$1000-$10000</option>
-          <option value="$10000+">$10000+</option>
+          <option value="$0-$1000">$0-$500</option>
+          <option value="$1000-$10000">$500-$5000</option>
+          <option value="$10000+">$5000+</option>
         </select>
         <span className="housing-form-row">
           <span className="housing-form-col" id="city-input">
-            <label>City:</label>
+            <label>Enter your city:</label>
             <input type="text" name="city" onChange={handleChangeAttr} />
           </span>
           <span className="housing-form-col" id="state-input">
-            <label>State:</label>
+            <label>Enter your state:</label>
             <input type="text" name="state" onChange={handleChangeAttr}  />
           </span>
         </span>
-        <label>Country:</label>
+        <label>Enter your country:</label>
         <input type="text" name="country" onChange={handleChangeAttr} />
         <button type="submit">Submit</button>
       </form>
-    </>
+    </div>
   );
 }
 
