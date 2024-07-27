@@ -34,7 +34,7 @@ def generate_recommendations(start_date, end_date, budget, city, state, country)
 
 @app.route('/')
 def home():
-    # Tests
+    # Tests generate_recommendations function.
     return generate_recommendations("July 27", "August 3", 1000.00)
 
 @app.route('/recommendations', methods=['POST'])
