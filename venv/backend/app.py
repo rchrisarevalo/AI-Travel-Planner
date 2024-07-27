@@ -35,7 +35,19 @@ def generate_recommendations(start_date, end_date, budget, city, state, country)
 @app.route('/')
 def home():
     # Tests generate_recommendations function.
-    return generate_recommendations("July 27", "August 3", 1000.00)
+    return generate_recommendations("July 27", "August 3", 1000.00, "San Diego", "California", "United States")
+
+@app.route('/rate_limit_check', methods=["GET"])
+def rate_limit_check():
+    print(OPENROUTER_API_KEY)
+    res = requests.get(
+        url='https://openrouter.ai/api/v1/auth/key',
+        headers={
+            'Authorization': f'Bearer {OPENROUTER_API_KEY}'
+        }
+    )
+
+    return res.json()
 
 @app.route('/recommendations', methods=['POST'])
 def getRecommendations():
