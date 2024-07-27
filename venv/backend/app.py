@@ -29,13 +29,20 @@ def generate_recommendations(start_date, end_date, budget, city, state, country)
         })
     )
     result = response.json()
-    print(response.json())
+    print("This is your result:", result)
     return result['choices'][0]['message']['content']
 
 @app.route('/')
 def home():
     # Tests generate_recommendations function.
-    return generate_recommendations("July 27", "August 3", 1000.00)
+    return generate_recommendations(
+        "2024-07-27",
+        "2024-08-03",
+        "$0-$500",
+        "McAllen",
+        "Texas",
+        "United States"
+    )
 
 @app.route('/recommendations', methods=['POST'])
 def getRecommendations():
@@ -46,7 +53,14 @@ def getRecommendations():
     city = data['city']
     state = data['state']
     country = data['country']
-    recommendations = generate_recommendations(start_date, end_date, budget, city, state, country)
+    recommendations = generate_recommendations(
+        start_date, 
+        end_date, 
+        budget, 
+        city, 
+        state, 
+        country
+    )
     return jsonify({"recommendations": recommendations})
 
 if __name__ == "__main__":
