@@ -14,8 +14,8 @@ CORS(app)
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-def generate_recommendations(start_date, end_date, budget):
-    prompt = f"Suggest travel destinations for a budget of {budget} dollars, between the dates {start_date} and {end_date}, and considering the weather at the destination."
+def generate_recommendations(start_date, end_date, budget, city, state, country):
+    prompt = f"Suggest travel destinations from {city}, {state}, {country} for a budget of {budget} dollars, between the dates {start_date} and {end_date}, and considering the weather at the destination."
     response = requests.post(
         url = "https://openrouter.ai/api/v1/chat/completions",
         headers = {
@@ -34,7 +34,7 @@ def generate_recommendations(start_date, end_date, budget):
 
 @app.route('/')
 def home():
-    # Tests
+    # Tests generate_recommendations function.
     return generate_recommendations("July 27", "August 3", 1000.00)
 
 @app.route('/recommendations', methods=['POST'])
@@ -43,7 +43,10 @@ def getRecommendations():
     start_date = data['start_date']
     end_date = data['end_date']
     budget = data['budget']
-    recommendations = generate_recommendations(start_date, end_date, budget)
+    city = data['city']
+    state = data['state']
+    country = data['country']
+    recommendations = generate_recommendations(start_date, end_date, budget, city, state, country)
     return jsonify({"recommendations": recommendations})
 
 if __name__ == "__main__":
