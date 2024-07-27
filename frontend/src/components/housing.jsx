@@ -4,7 +4,7 @@ function Housing() {
   const [form, setForm] = useState({
     start_date: "",
     end_date: "",
-    budget: "$0-$1000",
+    budget: "$0-$500",
     city: "",
     state: "",
     country: "",
@@ -57,7 +57,7 @@ function Housing() {
           </span>
           <span className="housing-form-col">
             <label>End date:</label>
-            <input type="date" name="end_date" onChange={handleChangeAttr} required />
+            <input type="date" name="end_date" onChange={handleChangeAttr} min={getDate()} required />
           </span>
         </span>
         <label>Select how much you are going to spend on your trip: </label>
