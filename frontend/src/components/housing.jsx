@@ -10,11 +10,13 @@ function Housing() {
     country: "",
   });
 
+  const [res, setRes] = useState("")
+
   const handleSubmission = (e) => {
     e.preventDefault();
 
-    useEffect(async () => {
-      const res = await fetch({
+    const retrieveData = async () => {
+      const res = await fetch('http://localhost:5000/recommendations', {
         method: 'POST',
         body: JSON.stringify(form),
         headers: {
@@ -24,10 +26,12 @@ function Housing() {
       
       if (res.ok) {
         const data = await res.json()
-        
+        setRes(data)
+      } else {
+        setRes("There was an error processing your request. Please try again.")
       }
-
-    }, [])
+    }
+    retrieveData()
   };
 
   const handleChangeAttr = (e) => {
@@ -41,7 +45,6 @@ function Housing() {
         return `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`
     }
   }
-  console.log(form)
 
   return (
     <div className="housing-form-wrapper">
@@ -50,11 +53,11 @@ function Housing() {
         <span className="housing-form-row">
           <span className="housing-form-col">
             <label>Start date:</label>
-            <input type="date" name="start_date" onChange={handleChangeAttr} min={getDate()} />
+            <input type="date" name="start_date" onChange={handleChangeAttr} min={getDate()} required />
           </span>
           <span className="housing-form-col">
             <label>End date:</label>
-            <input type="date" name="end_date" onChange={handleChangeAttr} />
+            <input type="date" name="end_date" onChange={handleChangeAttr} required />
           </span>
         </span>
         <label>Select how much you are going to spend on your trip: </label>
@@ -66,15 +69,15 @@ function Housing() {
         <span className="housing-form-row">
           <span className="housing-form-col" id="city-input">
             <label>Enter your city:</label>
-            <input type="text" name="city" onChange={handleChangeAttr} />
+            <input type="text" name="city" onChange={handleChangeAttr} required />
           </span>
           <span className="housing-form-col" id="state-input">
             <label>Enter your state:</label>
-            <input type="text" name="state" onChange={handleChangeAttr}  />
+            <input type="text" name="state" onChange={handleChangeAttr} required />
           </span>
         </span>
         <label>Enter your country:</label>
-        <input type="text" name="country" onChange={handleChangeAttr} />
+        <input type="text" name="country" onChange={handleChangeAttr} required />
         <button type="submit">Submit</button>
       </form>
     </div>
