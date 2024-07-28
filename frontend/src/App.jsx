@@ -31,8 +31,8 @@ function App() {
             Click on the Vite and React logos to learn more
           </p>
         </>} />
-        <Route path="/housing" element={<Housing />} />
-        <Route path="/weather" element={<Weather />} />
+        <Route path="/housing" element={<Housing/>} />
+        <Route path="/weather" element={<Weather/>} />
       </Routes>
     </Router>
   )
