@@ -81,3 +81,9 @@ body {
 .read-the-docs {
   color: #888;
 }
+
+@media screen and (max-width: 866px) {
+  .housing-form {
+    margin-left: 10%;
+  }
+}
