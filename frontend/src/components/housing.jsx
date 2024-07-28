@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Spinner from "react-bootstrap/Spinner";
 
 function Housing() {
   const [form, setForm] = useState({
@@ -146,12 +145,13 @@ function Housing() {
                 </>
               )
             ) : (
-              <Spinner animation="border" />
+              <p>Loading...</p>
             )}
           </>
         )}
       </>
     </div>
   );
+}
 
-export default Housing
+export default Housing;
