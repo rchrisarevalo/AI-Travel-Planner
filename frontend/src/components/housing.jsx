@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import MediaQuery from "react-responsive";
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 import '../App.css'
 import { useNavigate } from "react-router-dom";
 >>>>>>> Stashed changes
+=======
+import '../App.css'
+>>>>>>> main
 
 function Housing() {
   const navigate = useNavigate();
