@@ -61,53 +61,6 @@ const Weather = () => {
         }
     };
 
-    /*
-    const fetchWeatherAlert = async (location) => {
-        try {
-            const response = await axios.get(`https://localhost:5000/alerts`, {
-                params: {location}
-            });
-            setAlert(response.data.alerts);
-        } catch (error) {
-            console.error('Error fetching weather alert:', error.response || error.message || error);
-            setError('Failed to fetch weather alerts.');
-            setAlert(null);
-        }
-    };
-    */
-
-    /*
-    return (
-        <div>
-            <h1>Real-Time Weather Report</h1>
-            <input
-                type="text"
-                value={location}
-                onChange ={(e) => setLocation(e.target.value)}
-                placeholder="Enter location"
-            />
-            {error && <p>{error}</p>}
-            {weather && (
-                <div>
-                    <h2>Weather in {weather.name}</h2>
-                    <p>Temperature: {weather.main.temp}°C</p>
-                    <p>Weather: {weather.weather[0].description}</p>
-                    <p>Humidity: {weather.main.humidity}%</p>
-                    <p>Wind Speed: {weather.wind.speed} m/s</p>
-                </div>
-            )}
-            {alert && alert.length > 0 && (
-                <div>
-                    <h2>Weather Alerts</h2>
-                    {alert.map((a, index) => (
-                        <p key={index}>{a.description}</p>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-    */
-
     return (
         <div className="weather-container">
             <h1 className="title">Weather Forecast</h1>
