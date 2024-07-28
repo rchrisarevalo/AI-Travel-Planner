@@ -36,7 +36,6 @@ function App() {
         </>} />
         <Route path="/google_maps" element={<GoogleMaps />} />
         <Route path="/housing" element={<Housing />} />
-        <Route path="/GoogleMaps" element={<GoogleMaps />} />
       </Routes>
     </Router>
   )

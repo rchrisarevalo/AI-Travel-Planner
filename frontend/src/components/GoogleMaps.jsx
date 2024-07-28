@@ -1,11 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker, InfoWindow } from '@react-google-maps/api';
 
-<<<<<<< Updated upstream
-const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-=======
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
->>>>>>> Stashed changes
 
 // map size
 const mapContainerStyle = {
@@ -192,8 +188,4 @@ function GoogleMaps() {
     );
 }
 
-<<<<<<< Updated upstream
 export default GoogleMaps;
-=======
-export default GoogleMaps;
->>>>>>> Stashed changes
