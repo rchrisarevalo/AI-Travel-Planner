@@ -4,9 +4,16 @@ import background from "./../images/travel-background.jpg"
 import { FaBed } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 
+import ReactGA from 'react-ga'
+
 function Booking() {
     const [places, setPlaces] = useState([]);
     const [hotels, setHotels] = useState([]);
+    const [formData, setFormData] = useState({
+        start_date: "",
+        end_date: "",
+        city: "",
+    });
 
     //make these variables to pass in
     // checkin_date: '2024-08-02',
