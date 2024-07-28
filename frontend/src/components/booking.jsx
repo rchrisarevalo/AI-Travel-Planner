@@ -7,6 +7,42 @@ import { FaStar } from "react-icons/fa6";
 function Booking() {
     const [places, setPlaces] = useState([]);
     const [hotels, setHotels] = useState([]);
+    const [formData, setFormData] = useState({
+        start_date: "",
+        end_date: "",
+        city: "",
+    });
+
+    useEffect(() => {
+        const savedFormData = localStorage.getItem('housingForm');
+        if (savedFormData) {
+            const parsedData = JSON.parse(savedFormData);
+            setFormData(parsedData)
+            const fetchPlaces = async () => {
+                const options = {
+                    method: 'GET',
+                    url: 'https://booking-com.p.rapidapi.com/v1/hotels/locations',
+                    params: {
+                        name: parsedData.city,
+                        locale: 'en-us'
+                    },
+                    headers: {
+                        'x-rapidapi-key': '0126caf942mshfcaa12cfb05f98bp110564jsn789f0886cce7',
+                        'x-rapidapi-host': 'booking-com.p.rapidapi.com'
+                    }
+                };
+                try {
+                    const response = await axios.request(options);
+                    console.log(response.data[0]);
+                    setPlaces(response.data[0]);
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+            fetchPlaces();
+        }
+
+    }, []);
 
     //make these variables to pass in
     // checkin_date: '2024-08-02',
@@ -15,39 +51,13 @@ function Booking() {
     // checkout_date: '2024-08-07',
 
     useEffect(() => {
-        const fetchPlaces = async () => {
-            const options = {
-                method: 'GET',
-                url: 'https://booking-com.p.rapidapi.com/v1/hotels/locations',
-                params: {
-                    name: 'Boston',
-                    locale: 'en-us'
-                },
-                headers: {
-                    'x-rapidapi-key': '0126caf942mshfcaa12cfb05f98bp110564jsn789f0886cce7',
-                    'x-rapidapi-host': 'booking-com.p.rapidapi.com'
-                }
-            };
-            try {
-                const response = await axios.request(options);
-                console.log(response.data[0]);
-                setPlaces(response.data[0]);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchPlaces();
-    }, []);
- 
-    useEffect(() => {
         if (places && places['dest_id']) {
             const fetchHotels = async () => {
                 const options = {
                     method: 'GET',
                     url: 'https://booking-com.p.rapidapi.com/v1/hotels/search',
                     params: {
-                        checkout_date: '2024-08-07',
+                        checkout_date: formData.end_date,
                         order_by: 'popularity',
                         filter_by_currency: 'USD',
                         include_adjacency: 'true',
@@ -56,7 +66,7 @@ function Booking() {
                         dest_type: 'city',
                         adults_number: '2',
                         page_number: '0',
-                        checkin_date: '2024-08-02',
+                        checkin_date: formData.start_date,
                         locale: 'en-us',
                         units: 'metric'
                     },
@@ -83,7 +93,7 @@ function Booking() {
         currency: 'USD',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-      });
+    });
 
     return (
         <main style={{ backgroundImage: `url(${background})` }} className={`w-screen h-screen overflow-y-auto`}>
@@ -96,7 +106,7 @@ function Booking() {
                             className='h-[75px]' />
                         <h4 className='font-bold text-3xl'><a href={hotel['url']}>{hotel['hotel_name']}</a></h4>
                         <p>{hotel['address']}</p>
-                        <p className='flex flex-row items-center gap-x-2'>{hotel['review_score_word'] ? hotel['review_score_word']+" : " : ""}  Score: {hotel['review_score']}<FaStar /></p>
+                        <p className='flex flex-row items-center gap-x-2'>{hotel['review_score_word'] ? hotel['review_score_word'] + " : " : ""}  Score: {hotel['review_score']}<FaStar /></p>
                         <p>Total Reviews: {hotel['review_nr']}</p>
                         <p>Min Price for 6 Nights: {formatter.format(hotel['min_total_price'])}</p>
                         <p className='flex flex-row items-center gap-x-2'>{hotel['accommodation_type_name']}<FaBed /></p>
