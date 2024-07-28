@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Housing from './components/housing';
 import GoogleMaps from './components/GoogleMaps';
+import Booking from './components/booking';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -36,6 +37,7 @@ function App() {
           </p>
         </>} />
         <Route path="/google_maps" element={<GoogleMaps />} />
+        <Route path="/booking" element={<Booking />} />
         <Route path="/housing" element={<Housing />} />
       </Routes>
     </Router>
