@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Loader from './components/Loader';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import Housing from './components/housing';
 import Weather from './components/weather'
+import GoogleMaps from './components/GoogleMaps';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,15 +24,21 @@ function App() {
             </a>
           </div>
           <h1>Vite + React</h1>
-          <Loader pending={true} error={false}>
-            <p>This is something.</p>
-          </Loader>
+          <div className="card">
+            <button onClick={() => setCount((count) => count + 1)}>
+              count is {count}
+            </button>
+            <p>
+              Edit <code>src/App.jsx</code> and save to test HMR
+            </p>
+          </div>
           <p className="read-the-docs">
             Click on the Vite and React logos to learn more
           </p>
         </>} />
         <Route path="/housing" element={<Housing/>} />
         <Route path="/weather" element={<Weather/>} />
+        <Route path="/google_maps" element={<GoogleMaps />} />
       </Routes>
     </Router>
   )
