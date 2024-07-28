@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-image: url('./images/travel-background.jpg');
   background-repeat: no-repeat;
@@ -8,11 +13,54 @@ body {
   color: white;
 }
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.landing-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.landing-inner-wrapper {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
   text-align: center;
+}
+
+.landing-inner-wrapper p {
+  text-align: center;
+  font-size: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.landing-inner-wrapper h1 {
+  text-align: center;
+}
+
+.landing-inner-wrapper button {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 900;
+}
+
+.landing-inner-wrapper button a {
+  text-decoration: none;
+  padding: 15px 20px;
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+}
+
+.housing-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .housing-form {
@@ -33,6 +81,12 @@ body {
 .housing-form button {
   margin-top: 30px;
   margin-bottom: 30px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 900;
+  background-color: black;
+  color: white;
 }
 
 .housing-form input {
@@ -72,14 +126,6 @@ body {
 
 #state-input {
   margin-left: 10px;
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
 
 @media screen and (max-width: 866px) {
