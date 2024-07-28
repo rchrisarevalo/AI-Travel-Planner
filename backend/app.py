@@ -5,7 +5,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 #from transformers import pipeline
 
-load_dotenv()
+load_dotenv('../../.env')
 
 app = Flask(__name__)
 CORS(app)
@@ -13,7 +13,7 @@ CORS(app)
 #generator = pipeline('text-generation', model='')
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY")
+OPENWEATHERMAP_API_KEY = os.environ.get("OPENWEATHERMAP_API_KEY")
 base_url = "http://api.openweathermap.org/data/2.5/weather?"
 
 def generate_recommendations(start_date, end_date, budget, city, state, country):
@@ -38,7 +38,7 @@ def generate_recommendations(start_date, end_date, budget, city, state, country)
 
 #@app.route('/get_coords', methods=['POST'])
 
-def get_coordinates(city, state, country):
+def getCoordinates(city, state, country):
     try:
         response = requests.get('http://api.openweathermap.org/geo/1.0/direct', params={
             'q': f"{city},{state},{country}",
@@ -48,7 +48,7 @@ def get_coordinates(city, state, country):
         response.raise_for_status()
         data = response.json()
         if data:
-            return data[0]['lat'], data[0]['lon']
+            return data['lat'], data['lon']
         return None, None
     except requests.exceptions.RequestException as e:
         print(f"Error fetching coordinates: {e}")
@@ -85,26 +85,29 @@ def getRecommendations():
     recommendations = generate_recommendations(start_date, end_date, budget, city, state, country)
     return jsonify({"recommendations": recommendations})
 
-@app.route('/geo', methods=['GET'])
+@app.route('/geo', methods=['POST'])
 def get_coordinates():
-    city = request.args.get('city')
+    data = request.json
+    city = data['city']
     print(city)
-    state = request.args.get('state')
+    state = data['state']
     print(state)
-    country = request.args.get('country')
+    country = data['country']
     print(country)
 
     if city and state and country:
-        lat, lon = get_coordinates(city, state, country)
+        lat, lon = getCoordinates(city, state, country)
+        print({lat}, {lon})
         if lat is not None and lon is not None:
             return jsonify({'lat': lat, 'lon': lon})
         return jsonify({'error': 'Unable to get coordinates for the location'}), 500
     return jsonify({'error': 'City, state, and country parameters are required'}), 400
 
-@app.route('/forecast', methods=['GET'])
+@app.route('/forecast', methods=['POST'])
 def get_weather():
-    lat = request.args.get('lat')
-    lon = request.args.get('lon')
+    data = request.json
+    lat = data['lat']
+    lon = data['lon']
     if lat and lon:
         data = fetch_weather_data(lat, lon)
         if data:

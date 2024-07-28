@@ -34,7 +34,9 @@ const Weather = () => {
                     country
                 }
             });
+
             const { lat, lon } = geoResponse.data;
+            console.log({lat}, {lon});
             if (lat && lon) {
                 console.log(`Latitude: ${lat}`);
                 console.log(`Longitude: ${lon}`);
@@ -51,7 +53,7 @@ const Weather = () => {
                 setError('');
 
             } else {
-                setError('Unable to get coordinates for the location.');
+                setError('Unable to get final coordinates for the location.');
                 setWeather(null);
             }
         } catch (error) {
