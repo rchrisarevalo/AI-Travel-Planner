@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import MediaQuery from "react-responsive";
 import '../App.css'
+import { useNavigate } from "react-router-dom";
 
 function Housing() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     start_date: "",
     end_date: "",
@@ -22,39 +24,51 @@ function Housing() {
   const handleSubmission = (e) => {
     e.preventDefault();
 
-    // Set the submitted state variable
-    // to true.
-    setRequestStatus({ ...requestStatus, submitted: true });
+    //temporary fix
+    localStorage.setItem('housingForm', JSON.stringify({
+      start_date: form.start_date,
+      end_date: form.end_date,
+      city: form.city
+    }));
 
-    const retrieveData = async () => {
-      const res = await fetch("http://localhost:5000/recommendations", {
-        method: "POST",
-        body: JSON.stringify(form),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    setTimeout(() => {
+      navigate('/booking');
+    }, 1000); // 100ms delay
 
-      if (res.ok) {
-        const data = await res.json();
-        setRequestStatus({
-          ...requestStatus,
-          pending: false,
-          error: false,
-          submitted: true,
-        });
-        setRes(data.recommendations);
-      } else {
-        setRequestStatus({
-          ...requestStatus,
-          pending: false,
-          error: true,
-          submitted: true,
-        });
-        setRes("There was an error processing your request. Please try again.");
-      }
-    };
-    retrieveData();
+    // // Set the submitted state variable
+    // // to true.
+    // setRequestStatus({ ...requestStatus, submitted: true });
+
+    // const retrieveData = async () => {
+    //   const res = await fetch("http://localhost:5000/recommendations", {
+    //     method: "POST",
+    //     body: JSON.stringify(form),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+
+    //   if (res.ok) {
+    //     const data = await res.json();
+    //     setRequestStatus({
+    //       ...requestStatus,
+    //       pending: false,
+    //       error: false,
+    //       submitted: true,
+    //     });
+    //     setRes(data.recommendations);
+
+    //   } else {
+    //     setRequestStatus({
+    //       ...requestStatus,
+    //       pending: false,
+    //       error: true,
+    //       submitted: true,
+    //     });
+    //     setRes("There was an error processing your request. Please try again.");
+    //   }
+    // };
+    // retrieveData();
   };
 
   const handleChangeAttr = (e) => {
@@ -63,13 +77,11 @@ function Housing() {
 
   const getDate = () => {
     if (new Date().getMonth() + 1 >= 1 && new Date().getMonth() + 1 <= 9) {
-      return `${new Date().getFullYear()}-0${
-        new Date().getMonth() + 1
-      }-${new Date().getDate()}`;
+      return `${new Date().getFullYear()}-0${new Date().getMonth() + 1
+        }-${new Date().getDate()}`;
     } else {
-      return `${new Date().getFullYear()}-${
-        new Date().getMonth() + 1
-      }-${new Date().getDate()}`;
+      return `${new Date().getFullYear()}-${new Date().getMonth() + 1
+        }-${new Date().getDate()}`;
     }
   };
 
