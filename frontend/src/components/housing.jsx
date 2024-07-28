@@ -243,7 +243,9 @@ function Housing() {
                 </div>
               )
             ) : (
-              <p>Loading...</p>
+              <div className="housing-form-notice">
+                <p>Loading...</p>
+              </div>
             )}
           </>
         )}

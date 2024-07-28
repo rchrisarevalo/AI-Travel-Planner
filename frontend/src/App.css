@@ -12,6 +12,7 @@ body {
   background-position: center;
   font-family: 'Raleway', sans-serif;
   color: white;
+  height: 100%;
 }
 
 .landing-wrapper {
