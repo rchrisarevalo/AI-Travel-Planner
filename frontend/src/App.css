@@ -4,8 +4,8 @@ body {
   background-image: url('./images/travel-background.jpg');
   background-repeat: no-repeat;
   background-position: center;
-  color: white;
   font-family: 'Raleway', sans-serif;
+  color: white;
 }
 
 #root {
@@ -42,6 +42,8 @@ body {
   color-scheme: black;
   padding: 10px 20px;
   border: none;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
 }
 
 .housing-form select {
@@ -49,6 +51,8 @@ body {
   background-color: white;
   color: black;
   padding: 10px 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
 }
 
 .housing-form-col {
