@@ -8,9 +8,11 @@
 body {
   background-image: url('./images/travel-background.jpg');
   background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
   font-family: 'Raleway', sans-serif;
   color: white;
+  height: 100%;
 }
 
 .landing-wrapper {
@@ -78,7 +80,7 @@ body {
   padding-bottom: 20px;
 }
 
-.housing-form button {
+.housing-form button, .housing-form-notice button {
   margin-top: 30px;
   margin-bottom: 30px;
   border: none;
@@ -120,6 +122,13 @@ body {
   justify-content: space-between;
 }
 
+.housing-form-notice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
 #city-input {
   width: 95%;
 }
@@ -130,6 +139,16 @@ body {
 
 @media screen and (max-width: 866px) {
   .housing-form {
-    margin-left: 10%;
+    padding: 10px;
+  }
+  .housing-form-wrapper {
+    height: 100%;
+    margin: 3em;
+  }
+  #city-input {
+    width: 100%;
+  }
+  #state-input {
+    margin: 0;
   }
 }

@@ -29,25 +29,30 @@ def generate_recommendations(start_date, end_date, budget, city, state, country)
         })
     )
     result = response.json()
-    print(response.json())
     return result['choices'][0]['message']['content']
 
 @app.route('/')
 def home():
-    # Tests generate_recommendations function.
-    return generate_recommendations("July 27", "August 3", 1000.00)
+    return jsonify({"status": "API is working!"})
 
 @app.route('/recommendations', methods=['POST'])
 def getRecommendations():
-    data = request.json
-    start_date = data['start_date']
-    end_date = data['end_date']
-    budget = data['budget']
-    city = data['city']
-    state = data['state']
-    country = data['country']
-    recommendations = generate_recommendations(start_date, end_date, budget, city, state, country)
-    return jsonify({"recommendations": recommendations})
+    try:
+        data = request.json
+        start_date = data['start_date']
+        end_date = data['end_date']
+        budget = data['budget']
+        city = data['city']
+        state = data['state']
+        country = data['country']
+        recommendations = generate_recommendations(start_date, end_date, budget, city, state, country)
+        return jsonify({"recommendations": recommendations})
+    
+    except requests.HTTPError:
+        return jsonify({"recommendations": "There was an error."}), 500
+    
+    except KeyError:
+        return jsonify({"recommendations": "There was a key error."}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
