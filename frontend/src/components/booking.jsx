@@ -5,8 +5,14 @@ import { FaBed } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 
 function Booking() {
-    const [places, setPlaces] = useState(['1', '2', '3']);
+    const [places, setPlaces] = useState([]);
     const [hotels, setHotels] = useState([]);
+
+    //make these variables to pass in
+    // checkin_date: '2024-08-02',
+    // adults_number: '2',
+    // room_number: '1',
+    // checkout_date: '2024-08-07',
 
     useEffect(() => {
         const fetchPlaces = async () => {
@@ -33,7 +39,7 @@ function Booking() {
 
         fetchPlaces();
     }, []);
-
+ 
     useEffect(() => {
         if (places && places['dest_id']) {
             const fetchHotels = async () => {
