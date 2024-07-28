@@ -153,6 +153,5 @@ function Housing() {
       </>
     </div>
   );
-}
 
-export default Housing;
+export default Housing
