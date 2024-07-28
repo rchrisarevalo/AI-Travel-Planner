@@ -6,6 +6,7 @@ import viteLogo from '/vite.svg'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import Housing from './components/housing';
+import Weather from './components/weather'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +32,7 @@ function App() {
           </p>
         </>} />
         <Route path="/housing" element={<Housing />} />
+        <Route path="/weather" element={<Weather />} />
       </Routes>
     </Router>
   )
