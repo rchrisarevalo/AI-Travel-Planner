@@ -89,7 +89,7 @@ function Booking() {
         <main style={{ backgroundImage: `url(${background})` }} className={`w-screen h-screen overflow-y-auto`}>
             <h1 className='text-white font-extrabold font-mono text-8xl text-center p-8'>Housing Options</h1>
             {hotels.map((hotel, index) => (
-                <div key={index} className='text-2xl w-[40%] rounded-2xl shadow-inner bg-white p-8 my-6 mx-auto flex flex-row justify-between items-center'>
+                <div key={index} className='text-2xl w-[40%] rounded-2xl shadow-inner bg-white text-black p-8 my-6 mx-auto flex flex-row justify-between items-center'>
                     <div className='flex w-2/3 flex-col gap-y-1 text-left items-start justify-start'>
                         <img src={"https://hospitable.com/wp-content/uploads/2023/11/booking-grid-logo.svg"}
                             alt={"img"}

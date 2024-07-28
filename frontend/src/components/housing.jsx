@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MediaQuery from "react-responsive";
+import '../App.css'
 
 function Housing() {
   const [form, setForm] = useState({

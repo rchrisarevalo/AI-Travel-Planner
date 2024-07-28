@@ -118,7 +118,7 @@ function GoogleMaps() {
                 <div className='w-[20%] overflow-auto bg-[#00aa6c] shadow-inner'>
                     <h1 className='text-white underline font-extrabold text-center p-4 text-3xl font-mono'>Places to Stay</h1>
                     {placeDetails.map((place, index) => (
-                        <div className='w-[90%] flex flex-col mx-auto items-center justify-center my-6 rounded-2xl text-xl shadow-2xl bg-white p-6' key={index}>
+                        <div className='w-[90%] text-black flex flex-col mx-auto items-center justify-center my-6 rounded-2xl text-xl shadow-2xl bg-white p-6' key={index}>
                             <h1 className='mb-2 font-bold'>{place.details.name}</h1>
                             <div className='flex flex-row items-center justify-center'>
                                 {place.details.photos && (
@@ -184,7 +184,7 @@ function GoogleMaps() {
                                 id="origin-autocomplete"
                                 type="text"
                                 placeholder="Search for places"
-                                className='p-5 w-96 h-16 text-2xl'
+                                className='p-5 w-96 h-16 text-2xl text-black'
                             />
                         </Autocomplete>
                     </div>
