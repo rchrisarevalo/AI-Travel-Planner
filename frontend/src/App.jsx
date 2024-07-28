@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import './App.css';
+import './tailwind.css'
 import Housing from './components/housing';
 import Landing from './components/Landing';
 import GoogleMaps from './components/GoogleMaps';

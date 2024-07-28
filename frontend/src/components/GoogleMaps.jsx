@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker, InfoWindow } from '@react-google-maps/api';
-
 const API_KEY = import.meta.env._VITE_GOOGLE_MAPS_API_KEY;
 
 // map size
 const mapContainerStyle = {
-    height: "500px",
-    width: "1000px",
+    height: "100vh",  // Full screen height
+    width: "80vw",   // 70% of the screen width
 };
+
 
 // default center
 const center = {
@@ -113,8 +113,31 @@ function GoogleMaps() {
     };
 
     return (
-        <>
-            <LoadScript googleMapsApiKey={API_KEY} libraries={['places']}>
+        <LoadScript googleMapsApiKey={API_KEY} libraries={['places']}>
+            <main className='w-full h-screen flex flex-row overflow-y-hidden'>
+                <div className='w-[20%] overflow-auto bg-[#00aa6c] shadow-inner'>
+                    <h1 className='text-white underline font-extrabold text-center p-4 text-3xl font-mono'>Places to Stay</h1>
+                    {placeDetails.map((place, index) => (
+                        <div className='w-[90%] flex flex-col mx-auto items-center justify-center my-6 rounded-2xl text-xl shadow-2xl bg-white p-6' key={index}>
+                            <h1 className='mb-2 font-bold'>{place.details.name}</h1>
+                            <div className='flex flex-row items-center justify-center'>
+                                {place.details.photos && (
+                                    <img
+                                        src={place.details.photos[0].getUrl()}
+                                        alt={place.details.name}
+                                        style={{ width: "5vw", height: "5vw" }}
+                                        className='rounded-lg'
+                                    />
+                                )}
+                                <div className='text-center p-3 text-xl justify-center items-center flex flex-col'>
+                                    <p className=''>{place.details.vicinity}</p>
+                                    <p>Rating: {place.details.rating}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    ))}
+                </div>
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
                     options={mapOptions}
@@ -137,7 +160,7 @@ function GoogleMaps() {
                             }}
                             onCloseClick={() => setSelectedPlace(null)}
                         >
-                            <div>
+                            <div className='items-center text-black justify-center text-lg flex-col flex gap-y-2'>
                                 <h2>{selectedPlace.name}</h2>
                                 <p>{selectedPlace.vicinity}</p>
                                 <p>Rating: {selectedPlace.rating}</p>
@@ -145,7 +168,7 @@ function GoogleMaps() {
                                     <img
                                         src={selectedPlace.photos[0].getUrl()}
                                         alt={selectedPlace.name}
-                                        style={{ width: "100px", height: "100px" }}
+                                        style={{ width: "100%", height: "150px" }}
                                     />
                                 )}
                             </div>
@@ -153,6 +176,7 @@ function GoogleMaps() {
                     )}
                     <div style={{ position: "absolute", top: "10px", left: "10px", zIndex: 1 }}>
                         <Autocomplete
+                            className='text-2xl'
                             onLoad={(autocomplete) => setAutocompleteDestination(autocomplete)}
                             onPlaceChanged={() => onPlaceChanged(autocompleteDestination)}
                         >
@@ -160,31 +184,13 @@ function GoogleMaps() {
                                 id="origin-autocomplete"
                                 type="text"
                                 placeholder="Search for places"
-                                style={{ width: "300px", padding: "10px" }}
+                                className='p-5 w-96 h-16 text-2xl'
                             />
                         </Autocomplete>
                     </div>
                 </GoogleMap>
-            </LoadScript>
-            <div style={{ marginTop: "20px", padding: "10px" }}>
-                <h3>Lodging Options</h3>
-                {placeDetails.map((place, index) => (
-                    <div key={index}>
-                        <h4>{place.details.name}</h4>
-                        <p>{place.details.vicinity}</p>
-                        <p>Rating: {place.details.rating}</p>
-                        <p>{place.formatted_phone_number}</p>
-                        {place.details.photos && (
-                            <img
-                                src={place.details.photos[0].getUrl()}
-                                alt={place.details.name}
-                                style={{ width: "100px", height: "100px" }}
-                            />
-                        )}
-                    </div>
-                ))}
-            </div>
-        </>
+            </main>
+        </LoadScript>
     );
 }
 
