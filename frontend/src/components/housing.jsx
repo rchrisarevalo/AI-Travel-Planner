@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import MediaQuery from "react-responsive";
 
 function Housing() {
   const [form, setForm] = useState({
@@ -35,10 +36,20 @@ function Housing() {
 
       if (res.ok) {
         const data = await res.json();
-        setRequestStatus({...requestStatus, pending: false, error: false, submitted: true});
+        setRequestStatus({
+          ...requestStatus,
+          pending: false,
+          error: false,
+          submitted: true,
+        });
         setRes(data.recommendations);
       } else {
-        setRequestStatus({...requestStatus, pending: false, error: true, submitted: false});
+        setRequestStatus({
+          ...requestStatus,
+          pending: false,
+          error: true,
+          submitted: true,
+        });
         setRes("There was an error processing your request. Please try again.");
       }
     };
@@ -61,69 +72,138 @@ function Housing() {
     }
   };
 
+  useEffect(() => {
+    console.log(form.start_date)
+  }, [form])
+
   return (
     <div className="housing-form-wrapper">
       <>
         {!requestStatus.submitted ? (
-          <form className="housing-form" onSubmit={handleSubmission}>
-            <h3>See your travel possibilities!</h3>
-            <span className="housing-form-row">
-              <span className="housing-form-col">
-                <label>Start date:</label>
-                <input
-                  type="date"
-                  name="start_date"
-                  onChange={handleChangeAttr}
-                  min={getDate()}
-                  required
-                />
-              </span>
-              <span className="housing-form-col">
-                <label>End date:</label>
-                <input
-                  type="date"
-                  name="end_date"
-                  onChange={handleChangeAttr}
-                  min={getDate()}
-                  required
-                />
-              </span>
-            </span>
-            <label>Select how much you are going to spend on your trip: </label>
-            <select name="budget" onChange={handleChangeAttr}>
-              <option value="$0-$1000">$0-$500</option>
-              <option value="$1000-$10000">$500-$5000</option>
-              <option value="$10000+">$5000+</option>
-            </select>
-            <span className="housing-form-row">
-              <span className="housing-form-col" id="city-input">
-                <label>Enter your city:</label>
+          <>
+            <MediaQuery minWidth={866}>
+              <form className="housing-form" onSubmit={handleSubmission}>
+                <h3>See your travel possibilities!</h3>
+                <span className="housing-form-row">
+                  <span className="housing-form-col">
+                    <label>Start date:</label>
+                    <input
+                      type="date"
+                      name="start_date"
+                      onChange={handleChangeAttr}
+                      min={getDate()}
+                      required
+                    />
+                  </span>
+                  <span className="housing-form-col">
+                    <label>End date:</label>
+                    <input
+                      type="date"
+                      name="end_date"
+                      onChange={handleChangeAttr}
+                      min={form.start_date}
+                      required
+                    />
+                  </span>
+                </span>
+                <label>
+                  Select how much you are going to spend on your trip:{" "}
+                </label>
+                <select name="budget" onChange={handleChangeAttr}>
+                  <option value="$0-$1000">$0-$500</option>
+                  <option value="$1000-$10000">$500-$5000</option>
+                  <option value="$10000+">$5000+</option>
+                </select>
+                <span className="housing-form-row">
+                  <span className="housing-form-col" id="city-input">
+                    <label>Enter your city:</label>
+                    <input
+                      type="text"
+                      name="city"
+                      onChange={handleChangeAttr}
+                      required
+                    />
+                  </span>
+                  <span className="housing-form-col" id="state-input">
+                    <label>Enter your state:</label>
+                    <input
+                      type="text"
+                      name="state"
+                      onChange={handleChangeAttr}
+                      required
+                    />
+                  </span>
+                </span>
+                <label>Enter your country:</label>
                 <input
                   type="text"
-                  name="city"
+                  name="country"
                   onChange={handleChangeAttr}
                   required
                 />
-              </span>
-              <span className="housing-form-col" id="state-input">
-                <label>Enter your state:</label>
+                <button type="submit">Submit</button>
+              </form>
+            </MediaQuery>
+            <MediaQuery maxWidth={866}>
+              <form className="housing-form" onSubmit={handleSubmission}>
+                <h3>See your travel possibilities!</h3>
+                <span className="housing-form-col">
+                  <label>Start date:</label>
+                  <input
+                    type="date"
+                    name="start_date"
+                    onChange={handleChangeAttr}
+                    min={getDate()}
+                    required
+                  />
+                </span>
+                <span className="housing-form-col">
+                  <label>End date:</label>
+                  <input
+                    type="date"
+                    name="end_date"
+                    onChange={handleChangeAttr}
+                    min={form.start_date}
+                    required
+                  />
+                </span>
+                <label>
+                  Select how much you are going to spend on your trip:{" "}
+                </label>
+                <select name="budget" onChange={handleChangeAttr}>
+                  <option value="$0-$1000">$0-$500</option>
+                  <option value="$1000-$10000">$500-$5000</option>
+                  <option value="$10000+">$5000+</option>
+                </select>
+                <span className="housing-form-col" id="city-input">
+                  <label>Enter your city:</label>
+                  <input
+                    type="text"
+                    name="city"
+                    onChange={handleChangeAttr}
+                    required
+                  />
+                </span>
+                <span className="housing-form-col" id="state-input">
+                  <label>Enter your state:</label>
+                  <input
+                    type="text"
+                    name="state"
+                    onChange={handleChangeAttr}
+                    required
+                  />
+                </span>
+                <label>Enter your country:</label>
                 <input
                   type="text"
-                  name="state"
+                  name="country"
                   onChange={handleChangeAttr}
                   required
                 />
-              </span>
-            </span>
-            <label>Enter your country:</label>
-            <input
-              type="text"
-              name="country"
-              onChange={handleChangeAttr}
-              required
-            />
-            <button type="submit">Submit</button>
-          </form>
+                <button type="submit">Submit</button>
+              </form>
+            </MediaQuery>
+          </>
         ) : (
           <>
             {!requestStatus.pending ? (
@@ -132,17 +212,35 @@ function Housing() {
                   {/* Will display response from the Llama API after providing the necessary information in form. */}
                   <p>{res}</p>
                   <br></br>
-                  <button onClick={() => {setRequestStatus({...requestStatus, submitted: false}); setRes("");}}>Search Again</button>
+                  <button
+                    onClick={() => {
+                      setRequestStatus({ ...requestStatus, submitted: false });
+                      setRes("");
+                    }}
+                  >
+                    Search Again
+                  </button>
                 </>
               ) : (
-                <>
-                  <p>
+                <div className="housing-form-notice">
+                  <h4>
                     There was an error processing your request. Please try
                     again.
-                  </p>
+                  </h4>
                   <br></br>
-                  <button onClick={handleSubmission}>Submit</button>
-                </>
+                  <button
+                    onClick={() => {
+                      setRequestStatus({
+                        ...requestStatus,
+                        pending: true,
+                        error: false,
+                        submitted: false,
+                      });
+                    }}
+                  >
+                    Submit Again
+                  </button>
+                </div>
               )
             ) : (
               <p>Loading...</p>
