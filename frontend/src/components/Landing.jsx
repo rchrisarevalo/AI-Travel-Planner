@@ -2,30 +2,12 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css'
 
+import ReactGA from 'react-ga'
+
 const Landing = () => {
 
     useEffect(() => {
-        fetch('http://localhost:5000/geo', {
-            method: 'POST',
-            body: JSON.stringify({
-                city: 'San Francisco',
-                state: 'California',
-                country: 'United States'
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((res) => {
-            if (res.ok) {
-                return res.json()
-            } else {
-                throw new Error("Could not retrieve geo location.")
-            }
-        }).then((data) => {
-            console.log(data)
-        }).catch((error) => {
-            console.log(error)
-        })
+        ReactGA.pageview(window.location.pathname)
     }, [])
 
     return (

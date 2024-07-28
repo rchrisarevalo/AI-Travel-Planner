@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker, InfoWindow } from '@react-google-maps/api';
+import ReactGA from 'react-ga';
+
 const API_KEY = import.meta.env._VITE_GOOGLE_MAPS_API_KEY;
 
 // map size
@@ -32,6 +34,10 @@ function GoogleMaps() {
     const [lodgingMarkers, setLodgingMarkers] = useState([]);
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [placeDetails, setPlaceDetails] = useState([]);
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname)
+    }, [])
 
     const fetchPlaceDetails = (markers) => {
         const service = new window.google.maps.places.PlacesService(map);

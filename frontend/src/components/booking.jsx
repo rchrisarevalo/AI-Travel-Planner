@@ -15,6 +15,10 @@ function Booking() {
     // checkout_date: '2024-08-07',
 
     useEffect(() => {
+        ReactGA.pageview(window.location.pathname)
+    }, [])
+
+    useEffect(() => {
         const fetchPlaces = async () => {
             const options = {
                 method: 'GET',

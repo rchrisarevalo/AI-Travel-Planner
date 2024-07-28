@@ -8,6 +8,12 @@ import Landing from './components/Landing';
 import GoogleMaps from './components/GoogleMaps';
 import Booking from './components/booking';
 
+import ReactGA from 'react-ga';
+
+const TRACKING_ID = import.meta.env._VITE_GA_TRACKING_ID
+
+ReactGA.initialize(TRACKING_ID)
+
 function App() {
   const [count, setCount] = useState(0)
 

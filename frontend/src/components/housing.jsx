@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import MediaQuery from "react-responsive";
 import '../App.css'
 
+import ReactGA from 'react-ga'
+
 function Housing() {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname)
+  }, [])
+
   const [form, setForm] = useState({
     start_date: "",
     end_date: "",
@@ -209,7 +216,7 @@ function Housing() {
           <>
             {!requestStatus.pending ? (
               !requestStatus.error ? (
-                <>
+                <div className="housing-form-notice">
                   {/* Will display response from the Llama API after providing the necessary information in form. */}
                   <p>{res}</p>
                   <br></br>
@@ -221,7 +228,7 @@ function Housing() {
                   >
                     Search Again
                   </button>
-                </>
+                </div>
               ) : (
                 <div className="housing-form-notice">
                   <h4>
