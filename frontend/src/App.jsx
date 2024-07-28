@@ -5,6 +5,7 @@ import './App.css';
 import Housing from './components/housing';
 import Landing from './components/Landing';
 import GoogleMaps from './components/GoogleMaps';
+import Booking from './components/booking';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route index path="/" element={<Landing />} />
         <Route path="/google_maps" element={<GoogleMaps />} />
+        <Route path="/booking" element={<Booking />} />
         <Route path="/housing" element={<Housing />} />
       </Routes>
     </Router>
