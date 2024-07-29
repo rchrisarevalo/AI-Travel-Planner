@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker, InfoWindow } from '@react-google-maps/api';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 const API_KEY = import.meta.env._VITE_GOOGLE_MAPS_API_KEY;
 
@@ -36,7 +36,11 @@ function GoogleMaps() {
     const [placeDetails, setPlaceDetails] = useState([]);
 
     useEffect(() => {
-        ReactGA.pageview(window.location.pathname)
+        ReactGA.send({
+            hitType: 'pageview',
+            page: '/google_maps',
+            title: "Hotel Markers Page Using Google Maps API"
+        })
     }, [])
 
     const fetchPlaceDetails = (markers) => {

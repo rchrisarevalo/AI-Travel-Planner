@@ -8,7 +8,7 @@ import Landing from './components/Landing';
 import GoogleMaps from './components/GoogleMaps';
 import Booking from './components/booking';
 
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4'
 
 const TRACKING_ID = import.meta.env._VITE_GA_TRACKING_ID
 

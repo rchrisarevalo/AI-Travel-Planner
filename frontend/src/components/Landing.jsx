@@ -2,12 +2,16 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css'
 
-import ReactGA from 'react-ga'
+import ReactGA from 'react-ga4'
 
 const Landing = () => {
 
     useEffect(() => {
-        ReactGA.pageview(window.location.pathname)
+        ReactGA.send({
+            hitType: 'pageview',
+            page: '/',
+            title: "Landing Page"
+        })
     }, [])
 
     return (

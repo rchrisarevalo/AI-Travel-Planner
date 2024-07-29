@@ -4,7 +4,7 @@ import background from "./../images/travel-background.jpg"
 import { FaBed } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 
-import ReactGA from 'react-ga'
+import ReactGA from 'react-ga4'
 
 function Booking() {
     const [places, setPlaces] = useState([]);
@@ -22,7 +22,11 @@ function Booking() {
     // checkout_date: '2024-08-07',
 
     useEffect(() => {
-        ReactGA.pageview(window.location.pathname)
+        ReactGA.send({
+            hitType: 'pageview',
+            page: '/booking',
+            title: "Booking Page Using Booking.com API"
+        })
     }, [])
 
     useEffect(() => {

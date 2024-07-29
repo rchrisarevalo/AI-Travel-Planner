@@ -3,13 +3,17 @@ import MediaQuery from "react-responsive";
 import '../App.css'
 import { useNavigate } from "react-router-dom";
 
-import ReactGA from 'react-ga'
+import ReactGA from 'react-ga4'
 
 function Housing() {
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname)
-  }, [])
+    ReactGA.send({
+        hitType: 'pageview',
+        page: '/housing',
+        title: "Housing Form Page"
+    })
+}, [])
 
   const navigate = useNavigate();
   const [form, setForm] = useState({
